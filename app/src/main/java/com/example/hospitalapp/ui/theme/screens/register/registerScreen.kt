@@ -56,7 +56,8 @@ fun registerScreen(navController: NavController){
     val authViewModel: AuthViewModel = viewModel()
 
     Box(){
-        Image(painter = painterResource(id = R.drawable.background2),
+        Image(
+            painter = painterResource(id = R.drawable.background2),
             contentDescription = "register background",
             contentScale = ContentScale.FillBounds,
         )
@@ -95,6 +96,7 @@ fun registerScreen(navController: NavController){
             leadingIcon = { Icon(Icons.Default.Person, contentDescription = "Person icon") },
             modifier = Modifier
                 .fillMaxWidth(0.8f)
+
         )
         OutlinedTextField(
             value = email,
