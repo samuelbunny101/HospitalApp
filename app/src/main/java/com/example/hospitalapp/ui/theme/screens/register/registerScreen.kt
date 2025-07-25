@@ -20,7 +20,10 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldColors
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -32,6 +35,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.input.KeyboardType
@@ -47,15 +51,16 @@ import com.example.hospitalapp.data.AuthViewModel
 import com.example.hospitalapp.navigation.ROUTE_LOGIN
 
 @Composable
-fun registerScreen(navController: NavController){
+fun registerScreen(navController: NavController) {
     var username by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
+    var fullname by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var confirmpassword by remember { mutableStateOf("") }
 
     val authViewModel: AuthViewModel = viewModel()
 
-    Box(){
+    Box() {
         Image(
             painter = painterResource(id = R.drawable.background2),
             contentDescription = "register background",
@@ -63,11 +68,11 @@ fun registerScreen(navController: NavController){
         )
     }
 
-    Column (
+    Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
-    ){
+    ) {
         Text(
             text = "Register Here",
             fontSize = 40.sp,
@@ -81,7 +86,8 @@ fun registerScreen(navController: NavController){
                 .padding(5.dp)
         )
         Spacer(modifier = Modifier.height(20.dp))
-        Image(painter = painterResource(id = R.drawable.logo2),
+        Image(
+            painter = painterResource(id = R.drawable.logo2),
             contentDescription = "Image Logo2",
             modifier = Modifier
                 .fillMaxWidth()
@@ -90,53 +96,78 @@ fun registerScreen(navController: NavController){
         )
         OutlinedTextField(
             value = username,
-            onValueChange = {username = it},
+            onValueChange = { username = it },
             label = { Text("Enter Username") },
             placeholder = { Text("Please Enter Username") },
             leadingIcon = { Icon(Icons.Default.Person, contentDescription = "Person icon") },
             modifier = Modifier
-                .fillMaxWidth(0.8f)
-
+                .fillMaxWidth(0.8f),
+            textStyle = TextStyle(
+                color = Color.Blue
+            )
+        )
+        OutlinedTextField(
+            value = fullname,
+            onValueChange = { fullname = it },
+            label = { Text("Enter Fullname") },
+            placeholder = { Text("Please Enter Fullname") },
+            leadingIcon = { Icon(Icons.Default.Person, contentDescription = "Person icon") },
+            modifier = Modifier
+                .fillMaxWidth(0.8f),
+            colors = OutlinedTextFieldDefaults.colors(
+                Color.Blue
+            )
         )
         OutlinedTextField(
             value = email,
-            onValueChange = {email = it},
+            onValueChange = { email = it },
             label = { Text("Enter Email") },
             placeholder = { Text("Please Enter email") },
             leadingIcon = { Icon(Icons.Default.Email, contentDescription = "Email icon") },
             modifier = Modifier
                 .fillMaxWidth(0.8f),
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+            colors = OutlinedTextFieldDefaults.colors(
+                Color.Blue
+            )
         )
         OutlinedTextField(
             value = password,
-            onValueChange = {password = it},
+            onValueChange = { password = it },
             label = { Text("Enter Password") },
             placeholder = { Text("Please Enter a Password") },
             leadingIcon = { Icon(Icons.Default.Lock, contentDescription = "Password icon") },
             modifier = Modifier
-                .fillMaxWidth(0.8f)
+                .fillMaxWidth(0.8f),
+            colors = OutlinedTextFieldDefaults.colors(
+                Color.Blue
+            )
         )
         OutlinedTextField(
             value = confirmpassword,
-            onValueChange = {confirmpassword = it},
+            onValueChange = { confirmpassword = it },
             label = { Text("Confirm Password") },
             placeholder = { Text("Please Confirm Password") },
             leadingIcon = { Icon(Icons.Default.Lock, contentDescription = "Password icon") },
             modifier = Modifier
-                .fillMaxWidth(0.8f)
+                .fillMaxWidth(0.8f),
+            colors = OutlinedTextFieldDefaults.colors(
+                Color.Blue
+            )
         )
         Spacer(modifier = Modifier.height(10.dp))
         val context = LocalContext.current
         Button(
-            onClick = { authViewModel.signup(
+            onClick = {
+                authViewModel.signup(
                     username = username,
+                    fullname = fullname,
                     email = email,
                     password = password,
                     confirmPassword = confirmpassword,
                     navController = navController,
-                    context = context
-                ) },
+                    context = context)
+            },
             colors = ButtonDefaults.buttonColors(Color.Blue),
             modifier = Modifier
                 .fillMaxWidth(0.8f)
@@ -150,6 +181,7 @@ fun registerScreen(navController: NavController){
         )
     }
 }
+
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun registerScreenPreview(){

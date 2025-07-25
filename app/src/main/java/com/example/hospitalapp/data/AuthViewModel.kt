@@ -13,9 +13,10 @@ import com.google.firebase.database.FirebaseDatabase
 
 class AuthViewModel: ViewModel() {
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
-    fun signup(username: String, email: String, password: String, confirmPassword: String, navController: NavController, context: Context){
+    fun signup(username: String, fullname: String, email: String, password: String, confirmPassword: String, navController: NavController, context: Context){
         if (
             username.isBlank() ||
+            fullname.isBlank() ||
             email.isBlank() ||
             password.isBlank() ||
             confirmPassword.isBlank()
@@ -33,6 +34,7 @@ class AuthViewModel: ViewModel() {
                 val userId = auth.currentUser?.uid ?: ""
                 val user = UserModel(
                     username = username,
+                    fullname = fullname,
                     email = email,
                     userId = userId
                 )

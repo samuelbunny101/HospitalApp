@@ -18,6 +18,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -41,6 +42,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.hospitalapp.R
 import com.example.hospitalapp.data.AuthViewModel
+import java.time.format.TextStyle
 
 
 @Composable
@@ -83,7 +85,10 @@ fun loginScreen(navController: NavController){
             placeholder = { Text("Please Enter email") },
             leadingIcon = { Icon( Icons.Default.Email, contentDescription = "Email icon") },
             modifier = Modifier
-                .fillMaxWidth(0.8f)
+                .fillMaxWidth(0.8f),
+            colors = OutlinedTextFieldDefaults.colors(
+                Color.Blue
+            )
         )
         OutlinedTextField(
             value = password,
@@ -92,7 +97,10 @@ fun loginScreen(navController: NavController){
             placeholder = { Text("Please Enter a Password") },
             leadingIcon = { Icon( Icons.Default.Lock, contentDescription = "Password icon") },
             modifier = Modifier
-                .fillMaxWidth(0.8f)
+                .fillMaxWidth(0.8f),
+            colors = OutlinedTextFieldDefaults.colors(
+                Color.Blue
+            )
         )
         OutlinedTextField(
             value = confirmpassword,
@@ -101,7 +109,11 @@ fun loginScreen(navController: NavController){
             placeholder = { Text("Please Confirm Password") },
             leadingIcon = { Icon( Icons.Default.Lock, contentDescription = "Password icon") },
             modifier = Modifier
-                .fillMaxWidth(0.8f)
+                .fillMaxWidth(0.8f),
+            colors = OutlinedTextFieldDefaults.colors(
+                Color.Blue
+            )
+
         )
         Spacer(modifier = Modifier.height(10.dp))
         val context = LocalContext.current
